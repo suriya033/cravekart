@@ -1,0 +1,27 @@
+{
+    "expo": {
+        "name": "CraveKart Partner",
+        "slug": "cravekart-partner",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "scheme": "cravekart-partner",
+        "userInterfaceStyle": "light",
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "supportsTablet": true
+        },
+        "android": {
+            "adaptiveIcon": {
+                "backgroundColor": "#4B0082"
+            }
+        },
+        "plugins": [
+            "expo-router"
+        ],
+        "experiments": {
+            "typedRoutes": true
+        }
+    }
+}
