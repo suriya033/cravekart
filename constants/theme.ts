@@ -12,19 +12,34 @@ export const Colors = {
   light: {
     text: '#11181C',
     background: '#fff',
-    tint: tintColorLight,
+    tint: '#6236FF',
     icon: '#687076',
     tabIconDefault: '#687076',
-    tabIconSelected: tintColorLight,
+    tabIconSelected: '#6236FF',
   },
   dark: {
     text: '#ECEDEE',
     background: '#151718',
-    tint: tintColorDark,
+    tint: '#fff',
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
-    tabIconSelected: tintColorDark,
+    tabIconSelected: '#fff',
   },
+};
+
+export const CraveTheme = {
+  primary: '#6236FF',
+  secondary: '#FFB800',
+  background: '#F8F6FF',
+  surface: '#FFFFFF',
+  text: '#1A1D1E',
+  textLight: '#6A6A6A',
+  accent: '#FF4B3A',
+  cardBackground: '#4B2BB8',
+  white: '#FFFFFF',
+  black: '#000000',
+  gray: '#F3F4F6',
+  yellow: '#FFC107',
 };
 
 export const Fonts = Platform.select({

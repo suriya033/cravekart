@@ -1,24 +1,37 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator, FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { PartnerTheme } from '../../constants/theme';
-
-const DISHES = [
-    { id: '1', name: 'Farmhouse Pizza', category: 'Pizzas', price: '₹ 249', status: 'Available', image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=200' },
-    { id: '2', name: 'Butter Chicken', category: 'Main Course', price: '₹ 350', status: 'Out of Stock', image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?q=80&w=200' },
-    { id: '3', name: 'Garlic Bread', category: 'Sides', price: '₹ 120', status: 'Available', image: 'https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?q=80&w=200' },
-    { id: '4', name: 'Coke (500ml)', category: 'Beverages', price: '₹ 60', status: 'Available', image: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=200' },
-];
+import { dishApi } from '../../services/api';
 
 export default function MenuManagement() {
     const router = useRouter();
     const [activeCategory, setActiveCategory] = useState('All');
+    const [dishes, setDishes] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
 
     const categories = ['All', 'Pizzas', 'Main Course', 'Sides', 'Beverages'];
 
-    const renderItem = ({ item }: { item: typeof DISHES[0] }) => (
+    useEffect(() => {
+        fetchMenu();
+    }, []);
+
+    const fetchMenu = async () => {
+        try {
+            setLoading(true);
+            // Assuming restaurantId is 1 for the seeded 'Butter Chicken Factory'
+            const response = await dishApi.getByRestaurant(1);
+            setDishes(response.data);
+        } catch (error) {
+            console.error('Error fetching menu:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const renderItem = ({ item }: { item: any }) => (
         <View style={styles.dishCard}>
             <Image source={{ uri: item.image }} style={styles.dishImage} />
             <View style={styles.dishInfo}>
@@ -28,12 +41,12 @@ export default function MenuManagement() {
                         <Ionicons name="ellipsis-vertical" size={20} color={PartnerTheme.textSecondary} />
                     </TouchableOpacity>
                 </View>
-                <Text style={styles.dishCategory}>{item.category}</Text>
+                <Text style={styles.dishCategory}>{item.description}</Text>
                 <View style={styles.dishFooter}>
-                    <Text style={styles.dishPrice}>{item.price}</Text>
-                    <View style={[styles.statusBadge, { backgroundColor: item.status === 'Available' ? '#E8F5E9' : '#FFEBEE' }]}>
-                        <Text style={[styles.statusText, { color: item.status === 'Available' ? PartnerTheme.success : PartnerTheme.error }]}>
-                            {item.status}
+                    <Text style={styles.dishPrice}>₹ {item.price}</Text>
+                    <View style={[styles.statusBadge, { backgroundColor: '#E8F5E9' }]}>
+                        <Text style={[styles.statusText, { color: PartnerTheme.success }]}>
+                            Available
                         </Text>
                     </View>
                 </View>
@@ -71,13 +84,23 @@ export default function MenuManagement() {
                 />
             </View>
 
-            <FlatList
-                data={DISHES}
-                keyExtractor={(item) => item.id}
-                renderItem={renderItem}
-                contentContainerStyle={styles.dishList}
-                showsVerticalScrollIndicator={false}
-            />
+            {loading ? (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <ActivityIndicator size="large" color={PartnerTheme.primary} />
+                </View>
+            ) : dishes.length === 0 ? (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+                    <Text style={{ textAlign: 'center', color: '#666' }}>No menu items found for this restaurant.</Text>
+                </View>
+            ) : (
+                <FlatList
+                    data={dishes}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={renderItem}
+                    contentContainerStyle={styles.dishList}
+                    showsVerticalScrollIndicator={false}
+                />
+            )}
         </SafeAreaView>
     );
 }

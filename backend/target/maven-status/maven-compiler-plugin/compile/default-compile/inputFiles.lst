@@ -1,0 +1,16 @@
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\BackendApplication.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\controller\AuthController.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\controller\DishController.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\controller\OrderController.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\controller\RestaurantController.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\DataInitializer.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\model\Dish.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\model\Order.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\model\OrderItem.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\model\Restaurant.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\model\User.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\repository\DishRepository.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\repository\OrderRepository.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\repository\RestaurantRepository.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\repository\UserRepository.java
+C:\Users\gopi\Desktop\cravekart\backend\src\main\java\com\cravekart\backend\service\RestaurantService.java
